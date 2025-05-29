@@ -9,27 +9,27 @@
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
     <title>Ceneo Web Scraper</title>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header class="container sticky-top text-center">
         <h1>Ceneo Web Scraper</h1>
         <h2>{% block title %} {% endblock %}</h2>
     </header>
     <section class="container">
         <div class="row">
-            <div class="col-3">
-                <ul>
-                    <li><a href="{{url_for('index')}}">Strona główna</a></li>
-                    <li><a href="{{url_for('display_form')}}">Ekstrakcja opinii</a></li>
-                    <li><a href="{{url_for('products')}}">Lista produktów</a></li>
-                    <li><a href="{{url_for('author')}}">O autorze</a></li>
+            <div class="row">
+                <ul class="nav nav-tabs">
+                    <li><a href="{{url_for('index')}}" class="btn" role="button">Strona główna</a></li>
+                    <li><a href="{{url_for('display_form')}}" class="btn" role="button">Ekstrakcja opinii</a></li>
+                    <li><a href="{{url_for('products')}}" class="btn" role="button">Lista produktów</a></li>
+                    <li><a href="{{url_for('author')}}" class="btn" role="button">O autorze</a></li>
                 </ul>
             </div>
-            <div class="col-9">
+            <div class="row">
             {% block content %}{% endblock %}
             </div>
         </div>
     </section>
-    <footer class="container sticky-bottom text-center">
+    <footer class="container sticky-bottom text-center mt-auto">
         <p>Martyna Mazur, Uniwersytet Ekonomiczny w Krakowie</p>
     </footer>
     

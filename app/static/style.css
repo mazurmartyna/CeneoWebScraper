@@ -1,3 +1,99 @@
 h1 {
     color: #ff6400;
 }
+
+h2 {
+    color: #ff6400;
+}
+
+.btn{
+
+    background-color: #ff6400;
+    color:antiquewhite;
+
+}
+
+.btn:hover{
+    background-color: #ff8138;
+    color:antiquewhite
+}
+
+button {
+background-color: #ff6400;
+    color:antiquewhite;
+    border-radius: 10px;
+    border-color: #ff8138;
+}
+
+ul li {
+    margin: 5px;
+}
+
+.container{
+    padding: 10px 100px;
+    margin-bottom: 10px;
+    text-align: center;
+    position: center;
+}
+
+ol {
+    background-image: url(https://techlaw.pl/wp-content/uploads/2015/03/7bfa3409803180.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100vw;
+    height: 500px;
+    padding: 40px;
+    display: flex;
+    gap: 4vw;
+
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+   
+    }
+
+ol li {
+    list-style-type: none;
+    background: linear-gradient(to bottom, rgba(238, 238, 238, 0.958), rgba(238, 238, 238, 0.163));
+    
+    
+    border: 1px solid #ddd;
+    padding: 20px;
+
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+}
+
+
+ol::scroll-button(*) {
+border: 0;
+font-size: 2rem;
+background: none;
+color: rgb(0 0 0 / 0.7);
+cursor: pointer;
+
+
+}
+
+ol::scroll-button(*):hover,
+ol::scroll-button(*):focus {
+  color: rgb(0 0 0 / 1);
+}
+
+ol::scroll-button(*):active {
+  translate: 1px 1px;
+}
+
+ol::scroll-button(*):disabled {
+  color: rgb(0 0 0 / 0.2);
+  cursor: unset;
+}
+
+
+ol::scroll-button(left) {
+  content: "◄";
+}
+
+ol::scroll-button(right) {
+  content: "►";
+}
