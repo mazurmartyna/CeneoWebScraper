@@ -10,9 +10,9 @@
             <span class="badge bg-success rounded-pill">{{product.pros_count}}</span>
             <span class="badge bg-danger rounded-pill">{{product.cons_count}}</span>
             <span class="badge bg-ceneo rounded-pill">{{product.average_stars}}</span>
-            <a type="button" class="btn btn-info" href="#">CSV</a>
-            <a type="button" class="btn btn-info" href="#">XLSX</a>
-            <a type="button" class="btn btn-info" href="#">JSON</a>
+            <a type="button" class="btn btn-info" href="{{url_for('static', filename='files/csv_files/'+product.product_id+'.csv')}}" download>CSV</a>
+            <a type="button" class="btn btn-info" href="{{url_for('static', filename='files/xlsx_files/'+product.product_id+'.xlsx')}}" download>XLSX</a>
+            <a type="button" class="btn btn-info" href="{{url_for('static', filename='files/json_files/'+product.product_id+'.json')}}" download>JSON</a> 
         </li>
         {% endfor %}
    </ul>

@@ -3,6 +3,7 @@ import os
 import json
 import pandas as pd
 import requests
+import openpyxl
 from bs4 import BeautifulSoup
 from matplotlib import pyplot as plt
 from flask import render_template, request, redirect, url_for
@@ -80,7 +81,28 @@ def extract():
         "cons": opinions.cons.explode().dropna().value_counts().to_dict(),
         "recommendations": opinions.recommendation.value_counts(dropna=False).reindex(['Nie polecam','Polecam', None], fill_value=0).to_dict(),
     }
+    opinions_xlsx = opinions
+    opinions_xlsx =opinions_xlsx.set_index("opinion_id").T
+    
+    if not os.path.exists("./app/static/files"):
+        os.mkdir("./app/static/files")
+    if not os.path.exists("./app/static/files/csv_files"):
+        os.mkdir("./app/static/files/csv_files")
+    with open(f"./app/static/files/csv_files/{product_id}.csv", "w", encoding="UTF-8") as file:
+        opinions_xlsx.to_csv(file)
+   
+    if not os.path.exists("./app/static/files/json_files"):
+        os.mkdir("./app/static/files/json_files")
+    with open(f"./app/static/files/json_files/{product_id}.json", "w", encoding="UTF-8") as jf:
+        json.dump(stats, jf, indent=4, ensure_ascii=False)
 
+    
+
+    if not os.path.exists("./app/static/files/xlsx_files"):
+        os.mkdir("./app/static/files/xlsx_files")
+    with open(f"./app/static/files/xlsx_files/{product_id}.xlsx", "wb") as file:
+        opinions_xlsx.to_excel(file, engine='openpyxl')
+    
     if not os.path.exists("./app/data"):
         os.mkdir("./app/data")
     if not os.path.exists("./app/data/products"):
@@ -126,7 +148,28 @@ def charts(product_id):
         labels=['Nie polecam','Polecam','Nie mam zdania'],
         colors=["crimson","forestgreen", "lightgrey"] ,
         autopct="%1.1f%%"
-)
+    )
     plt.savefig(f"./app/static/images/charts/{stats["product_id"]}_pie.png")
     plt.close()
+    
+    with open(f"./app/data/opinions/{product_id}.json", "r", encoding="UTF-8") as jf:
+        opinions = json.load(jf)
+
+    wykres = pd.DataFrame(opinions)
+    stars_count = wykres['stars'].value_counts().sort_index()
+    plt.figure(figsize=(8, 5))
+
+    stars_count.plot(kind='bar', color='skyblue', edgecolor='black')
+    plt.title("Liczba opinii według liczby gwiazdek")
+    plt.xlabel("Liczba gwiazdek")
+    plt.ylabel("Liczba opinii")
+    plt.xticks(rotation=0)
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.tight_layout()
+    
+    plt.savefig(f"./app/static/images/charts/{stats["product_id"]}_chart.png")
+    plt.clf()
+    plt.close
+    
+
     return render_template("charts.html", product_id=product_id,product_name=stats["product_name"])

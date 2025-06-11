@@ -2,9 +2,9 @@
 {% block title %} {{product_id}} - {{product_name}} {% endblock %}
 {% block content %}
     <div class="btn-group" role="group" aria-label="Basic example">
-        <a type="button" class="btn btn-info" href="#">CSV</a>
-        <a type="button" class="btn btn-info" href="#">XLSX</a>
-        <a type="button" class="btn btn-info" href="#">JSON</a>
+        <a type="button" class="btn btn-info" href="{{url_for('static', filename='files/csv_files/'+product_id+'.csv')}}" download>CSV</a>
+        <a type="button" class="btn btn-info" href="{{url_for('static', filename='files/xlsx_files/'+product_id+'.xlsx')}}" download>XLSX</a>
+        <a type="button" class="btn btn-info" href="{{url_for('static', filename='files/json_files/'+product_id+'.json')}}" download>JSON</a> 
         <a type="button" class="btn" href="{{url_for('charts', product_id=product_id)}}"><i class="bi bi-bar-chart-fill"></i> <i class="bi bi-pie-chart-fill"></i></a>
     </div>  
 
@@ -14,7 +14,7 @@
                 <th class="text-center">Author</th>
                 <th class="text-center">Rekomendacja</th>
                 <th class="text-center"><i class="bi bi-star-fill"></i></th>
-                <th class="text-center"><i class="bi bi-hand-thumbs-up-fill"></i>></th>
+                <th class="text-center"><i class="bi bi-hand-thumbs-up-fill"></i></th>
                 <th class="text-center"><i class="bi bi-hand-thumbs-down-fill"></i></th>
                 <th class="text-center">Data wystawienia</th>
                 <th class="text-center">Data zakupu</th>
